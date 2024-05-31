@@ -31,14 +31,6 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	bool bAnalogNavigation;
 
-	/** Minimum analog value on the horizontal axes should have to perform navigation. */
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta=(EditCondition="bAnalogNavigation"))
-	float AnalogNavigationHorizontalThreshold;
-
-	/** Minimum analog value on the vertical axis should have to perform navigation. */
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta=(EditCondition="bAnalogNavigation"))
-	float AnalogNavigationVerticalThreshold;
-
 	/** Which Axis Key controls horizontal navigation */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta=(EditCondition="bAnalogNavigation"))
 	FKey AnalogHorizontalKey;
@@ -46,6 +38,14 @@ public:
 	/** Which Axis Key controls vertical navigation */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta=(EditCondition="bAnalogNavigation"))
 	FKey AnalogVerticalKey;
+
+	/** Minimum analog value on the horizontal axes should have to perform navigation. */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta=(EditCondition="bAnalogNavigation"))
+	float AnalogNavigationHorizontalThreshold;
+
+	/** Minimum analog value on the vertical axis should have to perform navigation. */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta=(EditCondition="bAnalogNavigation"))
+	float AnalogNavigationVerticalThreshold;
 };
 
 UCLASS()
