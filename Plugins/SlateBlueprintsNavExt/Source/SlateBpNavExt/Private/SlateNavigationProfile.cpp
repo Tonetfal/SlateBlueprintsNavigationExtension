@@ -1,8 +1,8 @@
 // Author: Antonio Sidenko (Tonetfal), May 2024
 
-#include "SBP_SettingsProfile.h"
+#include "SlateNavigationProfile.h"
 
-FSBP_SettingsProfile::FSBP_SettingsProfile()
+FSlateNavigationProfile::FSlateNavigationProfile()
 	: bTabNavigation(true)
 	, bKeyNavigation(true)
 	, bAnalogNavigation(true)

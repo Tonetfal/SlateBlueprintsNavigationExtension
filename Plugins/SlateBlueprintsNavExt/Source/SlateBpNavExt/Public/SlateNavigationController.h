@@ -6,10 +6,10 @@
 
 #include "SlateNavigationController.generated.h"
 
-class USBP_SettingsProfileAsset;
-struct FSBP_SettingsProfile;
+class USlateNavigationProfileAsset;
+struct FSlateNavigationProfile;
 
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, MinimalAPI)
 class USlateNavigationController final
 	: public UGameInstanceSubsystem
 {
@@ -23,13 +23,13 @@ public:
 public:
 	UFUNCTION(BlueprintCallable, Category="Slate & Blueprint Navigation Extensions",
 		meta=(Keywords="settings slate navigation"))
-	SLATEBPNAVEXT_API void ApplyProfileAsset(const USBP_SettingsProfileAsset* SettingsProfile);
+	SLATEBPNAVEXT_API void ApplyProfileAsset(const USlateNavigationProfileAsset* SettingsProfile);
 
 	UFUNCTION(BlueprintCallable, Category="Slate & Blueprint Navigation Extensions",
 		meta=(Keywords="settings slate navigation"))
-	SLATEBPNAVEXT_API void ApplyProfile(FSBP_SettingsProfile SettingsProfile);
+	SLATEBPNAVEXT_API void ApplyProfile(FSlateNavigationProfile SettingsProfile);
 
 	UFUNCTION(BlueprintPure, Category="Slate & Blueprint Navigation Extensions",
 		meta=(Keywords="settings slate navigation"))
-	SLATEBPNAVEXT_API FSBP_SettingsProfile GetActiveProfile() const;
+	SLATEBPNAVEXT_API FSlateNavigationProfile GetActiveProfile() const;
 };

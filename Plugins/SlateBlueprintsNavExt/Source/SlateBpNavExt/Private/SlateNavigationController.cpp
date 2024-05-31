@@ -3,18 +3,18 @@
 #include "SlateNavigationController.h"
 
 #include "Framework/Application/NavigationConfig.h"
-#include "SBP_DeveloperSettings.h"
-#include "SBP_SettingsProfile.h"
+#include "SlateNavigationExtensionsSettings.h"
+#include "SlateNavigationProfile.h"
 
 void USlateNavigationController::Initialize(FSubsystemCollectionBase& Collection)
 {
 	Super::Initialize(Collection);
 
-	const auto* Settings = GetDefault<USBP_DeveloperSettings>();
+	const auto* Settings = GetDefault<USlateNavigationExtensionsSettings>();
 	ApplyProfile(Settings->DefaultSettings);
 }
 
-void USlateNavigationController::ApplyProfileAsset(const USBP_SettingsProfileAsset* SettingsProfile)
+void USlateNavigationController::ApplyProfileAsset(const USlateNavigationProfileAsset* SettingsProfile)
 {
 	if (IsValid(SettingsProfile))
 	{
@@ -22,7 +22,7 @@ void USlateNavigationController::ApplyProfileAsset(const USBP_SettingsProfileAss
 	}
 }
 
-void USlateNavigationController::ApplyProfile(FSBP_SettingsProfile SettingsProfile)
+void USlateNavigationController::ApplyProfile(FSlateNavigationProfile SettingsProfile)
 {
 	TSharedRef<FNavigationConfig> SlateConfig = FSlateApplication::Get().GetNavigationConfig();
 	SlateConfig->bTabNavigation = SettingsProfile.bTabNavigation;
@@ -37,9 +37,9 @@ void USlateNavigationController::ApplyProfile(FSBP_SettingsProfile SettingsProfi
 	SlateConfig->AnalogNavigationVerticalThreshold = SettingsProfile.AnalogNavigationVerticalThreshold;
 }
 
-FSBP_SettingsProfile USlateNavigationController::GetActiveProfile() const
+FSlateNavigationProfile USlateNavigationController::GetActiveProfile() const
 {
-	FSBP_SettingsProfile SettingsProfile;
+	FSlateNavigationProfile SettingsProfile;
 
 	TSharedRef<FNavigationConfig> SlateConfig = FSlateApplication::Get().GetNavigationConfig();
 	SettingsProfile.bTabNavigation = SlateConfig->bTabNavigation;

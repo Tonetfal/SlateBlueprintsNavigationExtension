@@ -4,23 +4,23 @@
 
 #include "Engine/DataAsset.h"
 
-#include "SBP_SettingsProfile.generated.h"
+#include "SlateNavigationProfile.generated.h"
 
 USTRUCT(BlueprintType)
-struct SLATEBPNAVEXT_API FSBP_SettingsProfile
+struct FSlateNavigationProfile
 {
 	GENERATED_BODY()
 
 public:
-	FSBP_SettingsProfile();
+	FSlateNavigationProfile();
 
 public:
 	/** Should the Tab key perform next and previous style navigation. */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	bool bTabNavigation;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	/** Should we respect keys for navigation. */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	bool bKeyNavigation;
 
 	/** Digital key navigation rules. */
@@ -48,13 +48,13 @@ public:
 	float AnalogNavigationVerticalThreshold;
 };
 
-UCLASS()
-class SLATEBPNAVEXT_API USBP_SettingsProfileAsset
+UCLASS(Blueprintable, BlueprintType, MinimalAPI)
+class USlateNavigationProfileAsset
 	: public UPrimaryDataAsset
 {
 	GENERATED_BODY()
 
 public:
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-	FSBP_SettingsProfile Data;
+	UPROPERTY(EditDefaultsOnly)
+	FSlateNavigationProfile Data;
 };

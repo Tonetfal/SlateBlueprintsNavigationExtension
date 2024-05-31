@@ -3,12 +3,12 @@
 #pragma once
 
 #include "Engine/DeveloperSettings.h"
-#include "SBP_SettingsProfile.h"
+#include "SlateNavigationProfile.h"
 
-#include "SBP_DeveloperSettings.generated.h"
+#include "SlateNavigationExtensionsSettings.generated.h"
 
 UCLASS(Config="Engine", DefaultConfig, DisplayName="Slate & Blueprint Navigation Extension")
-class USBP_DeveloperSettings
+class USlateNavigationExtensionsSettings
 	: public UDeveloperSettings
 {
 	GENERATED_BODY()
@@ -16,5 +16,5 @@ class USBP_DeveloperSettings
 public:
 	/** Default settings applied to the game when it starts. */
 	UPROPERTY(Config, EditDefaultsOnly)
-	FSBP_SettingsProfile DefaultSettings;
+	FSlateNavigationProfile DefaultSettings;
 };
