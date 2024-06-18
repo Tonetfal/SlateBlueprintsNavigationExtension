@@ -15,11 +15,11 @@ public:
 	FSlateNavigationProfile();
 
 public:
-	/** Should the Tab key perform next and previous style navigation. */
+	/** Should the Tab key perform next and previous style navigation? */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	bool bTabNavigation;
 
-	/** Should we respect keys for navigation. */
+	/** Should we respect keys for navigation? */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	bool bKeyNavigation;
 
@@ -27,7 +27,7 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta=(EditCondition="bKeyNavigation"))
 	TMap<FKey, EUINavigation> KeyEventRules;
 
-	/** Should we respect the analog stick for navigation. */
+	/** Should we respect the analog stick for navigation? */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	bool bAnalogNavigation;
 
@@ -46,6 +46,10 @@ public:
 	/** Minimum analog value on the vertical axis should have to perform navigation. */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta=(EditCondition="bAnalogNavigation"))
 	float AnalogNavigationVerticalThreshold;
+
+	/** Keys used to trigger a native action. */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	TMap<FKey, EUINavigationAction> KeyActions;
 };
 
 UCLASS(Blueprintable, BlueprintType, MinimalAPI)

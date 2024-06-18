@@ -10,6 +10,9 @@ void USlateNavigationController::Initialize(FSubsystemCollectionBase& Collection
 {
 	Super::Initialize(Collection);
 
+	Config = MakeShared<FExtendedNavigationConfig>();
+	FSlateApplication::Get().SetNavigationConfig(Config.ToSharedRef());
+
 	const auto* Settings = GetDefault<USlateNavigationExtensionsSettings>();
 	ApplyProfile(Settings->DefaultSettings);
 }
@@ -24,34 +27,42 @@ void USlateNavigationController::ApplyProfileAsset(const USlateNavigationProfile
 
 void USlateNavigationController::ApplyProfile(FSlateNavigationProfile SettingsProfile)
 {
-	TSharedRef<FNavigationConfig> SlateConfig = FSlateApplication::Get().GetNavigationConfig();
-	SlateConfig->bTabNavigation = SettingsProfile.bTabNavigation;
-	SlateConfig->bAnalogNavigation = SettingsProfile.bAnalogNavigation;
+	Config->bTabNavigation = SettingsProfile.bTabNavigation;
+	Config->bAnalogNavigation = SettingsProfile.bAnalogNavigation;
 
-	SlateConfig->bKeyNavigation = SettingsProfile.bKeyNavigation;
-	SlateConfig->KeyEventRules = SettingsProfile.KeyEventRules;
+	Config->bKeyNavigation = SettingsProfile.bKeyNavigation;
+	Config->KeyEventRules = SettingsProfile.KeyEventRules;
 
-	SlateConfig->AnalogHorizontalKey = SettingsProfile.AnalogHorizontalKey;
-	SlateConfig->AnalogVerticalKey = SettingsProfile.AnalogVerticalKey;
-	SlateConfig->AnalogNavigationHorizontalThreshold = SettingsProfile.AnalogNavigationHorizontalThreshold;
-	SlateConfig->AnalogNavigationVerticalThreshold = SettingsProfile.AnalogNavigationVerticalThreshold;
+	Config->AnalogHorizontalKey = SettingsProfile.AnalogHorizontalKey;
+	Config->AnalogVerticalKey = SettingsProfile.AnalogVerticalKey;
+	Config->AnalogNavigationHorizontalThreshold = SettingsProfile.AnalogNavigationHorizontalThreshold;
+	Config->AnalogNavigationVerticalThreshold = SettingsProfile.AnalogNavigationVerticalThreshold;
+
+	Config->KeyActions = SettingsProfile.KeyActions;
 }
 
 FSlateNavigationProfile USlateNavigationController::GetActiveProfile() const
 {
 	FSlateNavigationProfile SettingsProfile;
 
-	TSharedRef<FNavigationConfig> SlateConfig = FSlateApplication::Get().GetNavigationConfig();
-	SettingsProfile.bTabNavigation = SlateConfig->bTabNavigation;
-	SettingsProfile.bAnalogNavigation = SlateConfig->bAnalogNavigation;
+	SettingsProfile.bTabNavigation = Config->bTabNavigation;
+	SettingsProfile.bAnalogNavigation = Config->bAnalogNavigation;
 
-	SettingsProfile.bKeyNavigation = SlateConfig->bKeyNavigation;
-	SettingsProfile.KeyEventRules = SlateConfig->KeyEventRules;
+	SettingsProfile.bKeyNavigation = Config->bKeyNavigation;
+	SettingsProfile.KeyEventRules = Config->KeyEventRules;
 
-	SettingsProfile.AnalogHorizontalKey = SlateConfig->AnalogHorizontalKey;
-	SettingsProfile.AnalogVerticalKey = SlateConfig->AnalogVerticalKey;
-	SettingsProfile.AnalogNavigationHorizontalThreshold = SlateConfig->AnalogNavigationHorizontalThreshold;
-	SettingsProfile.AnalogNavigationVerticalThreshold = SlateConfig->AnalogNavigationVerticalThreshold;
+	SettingsProfile.AnalogHorizontalKey = Config->AnalogHorizontalKey;
+	SettingsProfile.AnalogVerticalKey = Config->AnalogVerticalKey;
+	SettingsProfile.AnalogNavigationHorizontalThreshold = Config->AnalogNavigationHorizontalThreshold;
+	SettingsProfile.AnalogNavigationVerticalThreshold = Config->AnalogNavigationVerticalThreshold;
+
+	SettingsProfile.KeyActions = Config->KeyActions;
 
 	return SettingsProfile;
+}
+
+EUINavigationAction FExtendedNavigationConfig::GetNavigationActionForKey(const FKey& InKey) const
+{
+	const auto* FoundAction = KeyActions.Find(InKey);
+	return FoundAction ? *FoundAction : EUINavigationAction::Invalid;
 }

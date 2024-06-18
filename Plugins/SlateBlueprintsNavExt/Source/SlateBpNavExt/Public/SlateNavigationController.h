@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "Framework/Application/NavigationConfig.h"
 #include "Subsystems/GameInstanceSubsystem.h"
 
 #include "SlateNavigationController.generated.h"
@@ -32,4 +33,20 @@ public:
 	UFUNCTION(BlueprintPure, Category="Slate & Blueprint Navigation Extensions",
 		meta=(Keywords="settings slate navigation"))
 	SLATEBPNAVEXT_API FSlateNavigationProfile GetActiveProfile() const;
+
+private:
+	TSharedPtr<class FExtendedNavigationConfig> Config = nullptr;
+};
+
+class FExtendedNavigationConfig
+	: public FNavigationConfig
+	, public TSharedFromThis<FExtendedNavigationConfig>
+{
+public:
+	//~FNavigationConfig Interface
+	virtual EUINavigationAction GetNavigationActionForKey(const FKey& InKey) const override;
+	//~End of FNavigationConfig Interface
+
+public:
+	TMap<FKey, EUINavigationAction> KeyActions;
 };

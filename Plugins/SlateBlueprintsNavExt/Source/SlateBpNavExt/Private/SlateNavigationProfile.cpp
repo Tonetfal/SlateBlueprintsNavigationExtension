@@ -6,12 +6,11 @@ FSlateNavigationProfile::FSlateNavigationProfile()
 	: bTabNavigation(true)
 	, bKeyNavigation(true)
 	, bAnalogNavigation(true)
+	, AnalogHorizontalKey(EKeys::Gamepad_LeftX)
+	, AnalogVerticalKey(EKeys::Gamepad_LeftY)
 	, AnalogNavigationHorizontalThreshold(0.50f)
 	, AnalogNavigationVerticalThreshold(0.50f)
 {
-	AnalogHorizontalKey = EKeys::Gamepad_LeftX;
-	AnalogVerticalKey = EKeys::Gamepad_LeftY;
-
 	KeyEventRules.Emplace(EKeys::Left, EUINavigation::Left);
 	KeyEventRules.Emplace(EKeys::Gamepad_DPad_Left, EUINavigation::Left);
 
@@ -23,4 +22,11 @@ FSlateNavigationProfile::FSlateNavigationProfile()
 
 	KeyEventRules.Emplace(EKeys::Down, EUINavigation::Down);
 	KeyEventRules.Emplace(EKeys::Gamepad_DPad_Down, EUINavigation::Down);
+
+	KeyActions.Emplace(EKeys::Enter, EUINavigationAction::Accept);
+	KeyActions.Emplace(EKeys::SpaceBar, EUINavigationAction::Accept);
+	KeyActions.Emplace(EKeys::Virtual_Accept, EUINavigationAction::Accept);
+
+	KeyActions.Emplace(EKeys::Escape, EUINavigationAction::Back);
+	KeyActions.Emplace(EKeys::Virtual_Back, EUINavigationAction::Back);
 }
