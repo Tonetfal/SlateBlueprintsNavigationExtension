@@ -17,6 +17,16 @@ void USlateNavigationController::Initialize(FSubsystemCollectionBase& Collection
 	ApplyProfile(Settings->DefaultSettings);
 }
 
+bool USlateNavigationController::ShouldCreateSubsystem(UObject* Outer) const
+{
+	if (IsRunningDedicatedServer())
+	{
+		return false;
+	}
+
+	return Super::ShouldCreateSubsystem(Outer);
+}
+
 void USlateNavigationController::ApplyProfileAsset(const USlateNavigationProfileAsset* SettingsProfile)
 {
 	if (IsValid(SettingsProfile))
