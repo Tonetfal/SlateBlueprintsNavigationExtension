@@ -41,7 +41,6 @@ private:
 
 class FExtendedNavigationConfig
 	: public FNavigationConfig
-	, public TSharedFromThis<FExtendedNavigationConfig>
 {
 public:
 	//~FNavigationConfig Interface
